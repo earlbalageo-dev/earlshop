@@ -1,0 +1,30 @@
+{
+  "name": "earlshop",
+  "version": "1.0.0",
+  "description": "EARLSHOP E-commerce made with MERN stack",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/earlbalageo-dev/earlshop.git"
+  },
+  "author": "EARL BALAGEO",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/earlbalageo-dev/earlshop/issues"
+  },
+  "homepage": "https://github.com/earlbalageo-dev/earlshop#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.12"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0",
+    "nodemon": "^2.0.7"
+  }
+}
