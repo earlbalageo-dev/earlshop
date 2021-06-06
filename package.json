@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "EARLSHOP E-commerce made with MERN stack",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",
@@ -20,8 +21,12 @@
   },
   "homepage": "https://github.com/earlbalageo-dev/earlshop#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongoose": "^5.12.12"
+    "express-async-handler": "^1.1.4",
+    "mongoose": "^5.12.12",
+    "react-router-bootstrap": "^0.25.0"
   },
   "devDependencies": {
     "concurrently": "^6.2.0",
