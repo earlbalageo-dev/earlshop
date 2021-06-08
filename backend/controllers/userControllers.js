@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/UserModel.js';
+import generateToken from '../utils/generateToken.js';
 
 //@desc    Register new user
 //@route   POST api/users/register
@@ -51,11 +52,11 @@ const loginUser = asyncHandler(async (req, res) => {
       lastName: user.lastName,
       email: user.email,
       isAdmin: user.isAdmin,
-      //token:
+      token: generateToken(user._id),
     });
   } else {
     res.status(401);
-    throw new Error('Invalid Credentials');
+    throw new Error('Invalid Email or Password');
   }
 });
 
