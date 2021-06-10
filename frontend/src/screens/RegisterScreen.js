@@ -1,28 +1,24 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../actions/userActions';
 import { Container, Form, Button, Row, Col, Alert } from 'react-bootstrap';
 
-const LoginScreen = ({ location, history }) => {
+const RegisterScreen = () => {
   const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setlastName] = useState('');
   const [password, setPassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
 
-  const dispatch = useDispatch();
-  const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, userInfo } = userLogin;
+  const error = '';
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(`Location: ${location.search}`);
-    console.log(`History: ${history}`);
-    dispatch(login(email, password));
   };
-
   return (
     <Container>
       <Row className='justify-content-md-center my-4'>
         <Col md={4}>
           <h1 className='text-center'>Login</h1>
-          {error && <Alert variant='danger'>{error}</Alert>}
+
           <Form onSubmit={submitHandler}>
             <Form.Group controlId='formBasicEmail'>
               <Form.Label>Email address</Form.Label>
@@ -61,4 +57,4 @@ const LoginScreen = ({ location, history }) => {
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;
