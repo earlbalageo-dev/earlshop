@@ -12,8 +12,8 @@ function App() {
       <Header />
       <main>
         <Container>
-          <Route path='/register' compontent={RegisterScreen} />
           <Route path='/login' component={LoginScreen} />
+          <Route path='/register' component={RegisterScreen} />
           <Route path='/' component={HomeScreen} exact />
         </Container>
       </main>

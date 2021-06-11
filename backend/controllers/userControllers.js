@@ -1,39 +1,47 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/UserModel.js';
 import generateToken from '../utils/generateToken.js';
+import validateRegisterInput from '../utils/validation/validateRegisterInput.js';
 
 //@desc    Register new user
 //@route   POST api/users/register
 //@access  PUBLIC
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, confirmPassword } = req.body;
+  const { errors, isValid } = validateRegisterInput(req.body);
 
-  const userExist = await User.findOne({ email });
-
-  if (userExist) {
+  //validate inputs
+  if (!isValid) {
     res.status(400);
-    throw new Error('Email has already been used');
-  }
-
-  const user = await User.create({
-    firstName,
-    lastName,
-    email,
-    password,
-  });
-
-  if (user) {
-    res.status(201).json({
-      _id: user._id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      isAdmin: user.isAdmin,
-    });
+    throw new Error(errors);
   } else {
-    res.status(400);
-    throw new Error('invalid user data');
+    const userExist = await User.findOne({ email });
+
+    if (userExist) {
+      res.status(400);
+      throw new Error('Email has already been used');
+    }
+
+    const user = await User.create({
+      firstName,
+      lastName,
+      email,
+      password,
+    });
+
+    if (user) {
+      res.status(201).json({
+        _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        isAdmin: user.isAdmin,
+      });
+    } else {
+      res.status(400);
+      throw new Error('invalid user data');
+    }
   }
 });
 
