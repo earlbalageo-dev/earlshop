@@ -2,13 +2,20 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Form, Button, Row, Col, Alert } from 'react-bootstrap';
 import { register } from '../actions/userActions';
+import Loader from '../components/Loader';
 const RegisterScreen = () => {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setlastName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [validated, setValidated] = useState(false);
+
   const dispatch = useDispatch();
+
+  const userRegister = useSelector((state) => state.userRegister);
+
+  const { loading, error, userInfo } = userRegister;
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -19,6 +26,7 @@ const RegisterScreen = () => {
       <Row className='justify-content-md-center my-4'>
         <Col md={4}>
           <h1 className='text-center'>Register</h1>
+          {loading && <Loader />}
           <Form onSubmit={submitHandler}>
             <Form.Group controlId='formBasicPassword'>
               <Form.Label>First Name</Form.Label>
@@ -27,7 +35,11 @@ const RegisterScreen = () => {
                 placeholder='First Name'
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
+                isInvalid={error && error.firstName ? true : false}
               />
+              <Form.Control.Feedback type='invalid'>
+                {error && error.firstName}
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId='lastName'>
               <Form.Label>Last Name</Form.Label>
@@ -36,7 +48,11 @@ const RegisterScreen = () => {
                 placeholder='Last Name'
                 value={lastName}
                 onChange={(e) => setlastName(e.target.value)}
+                isInvalid={error && error.lastName ? true : false}
               />
+              <Form.Control.Feedback type='invalid'>
+                {error && error.lastName}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId='email'>
@@ -46,7 +62,11 @@ const RegisterScreen = () => {
                 placeholder='Enter email'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                isInvalid={error && error.email ? true : false}
               />
+              <Form.Control.Feedback type='invalid'>
+                {error && error.email}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId='password'>
@@ -56,7 +76,11 @@ const RegisterScreen = () => {
                 placeholder='Password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                isInvalid={error && error.password ? true : false}
               />
+              <Form.Control.Feedback type='invalid'>
+                {error && error.password}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId='confirmPassword'>
@@ -66,7 +90,11 @@ const RegisterScreen = () => {
                 placeholder='Confirm Password'
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                isInvalid={error && error.confirmPassword ? true : false}
               />
+              <Form.Control.Feedback type='invalid'>
+                {error && error.confirmPassword}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Button

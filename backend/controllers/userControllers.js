@@ -13,35 +13,33 @@ const registerUser = asyncHandler(async (req, res) => {
 
   //validate inputs
   if (!isValid) {
+    res.status(400).json(errors);
+  }
+  const userExist = await User.findOne({ email });
+
+  if (userExist) {
     res.status(400);
-    throw new Error(errors);
-  } else {
-    const userExist = await User.findOne({ email });
+    throw new Error('Email has already been used');
+  }
 
-    if (userExist) {
-      res.status(400);
-      throw new Error('Email has already been used');
-    }
+  const user = await User.create({
+    firstName,
+    lastName,
+    email,
+    password,
+  });
 
-    const user = await User.create({
-      firstName,
-      lastName,
-      email,
-      password,
+  if (user) {
+    res.status(201).json({
+      _id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      isAdmin: user.isAdmin,
     });
-
-    if (user) {
-      res.status(201).json({
-        _id: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        isAdmin: user.isAdmin,
-      });
-    } else {
-      res.status(400);
-      throw new Error('invalid user data');
-    }
+  } else {
+    res.status(400);
+    throw new Error('invalid user data');
   }
 });
 

@@ -3,6 +3,9 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
+  USER_REGISTER_REQUEST,
+  USER_REGISTER_SUCCESS,
+  USER_REGISTER_FAIL,
 } from '../constants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -35,7 +38,7 @@ export const register = (
   confirmPassword
 ) => async (dispatch) => {
   try {
-    dispatch({ type: USER_LOGIN_REQUEST });
+    dispatch({ type: USER_REGISTER_REQUEST });
 
     const config = {
       headers: {
@@ -49,13 +52,9 @@ export const register = (
       config
     );
 
-    // if (data.errors) {
-    //   dispatch({ type: USER_LOGIN_FAIL, payload: data.errors });
-    // }
-
-    //dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
+    dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
   } catch (error) {
-    console.log(error.response.data.message.email);
-    dispatch({ type: USER_LOGIN_FAIL, payload: error.response.data.message });
+    //console.log(error.response.data);
+    dispatch({ type: USER_REGISTER_FAIL, payload: error.response.data });
   }
 };

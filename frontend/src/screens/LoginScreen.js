@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../actions/userActions';
 import { Container, Form, Button, Row, Col, Alert } from 'react-bootstrap';
+import Loader from '../components/Loader';
 
 const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState('');
@@ -22,6 +23,7 @@ const LoginScreen = ({ location, history }) => {
       <Row className='justify-content-md-center my-4'>
         <Col md={4}>
           <h1 className='text-center'>Login</h1>
+          {loading && <Loader />}
           {error && <Alert variant='danger'>{error}</Alert>}
           <Form onSubmit={submitHandler}>
             <Form.Group controlId='formBasicEmail'>
