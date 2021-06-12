@@ -10,8 +10,6 @@ const Header = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {}, []);
-
   const logoutHandler = () => {
     dispatch(logout());
   };
