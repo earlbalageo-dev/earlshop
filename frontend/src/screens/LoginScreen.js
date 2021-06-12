@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../actions/userActions';
 import { Container, Form, Button, Row, Col, Alert } from 'react-bootstrap';
@@ -11,10 +11,15 @@ const LoginScreen = ({ location, history }) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
+  useEffect(() => {
+    if (userInfo) {
+      history.push('/');
+    }
+  }, [history, userInfo]);
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(`Location: ${location.search}`);
-    console.log(`History: ${history}`);
+
     dispatch(login(email, password));
   };
 

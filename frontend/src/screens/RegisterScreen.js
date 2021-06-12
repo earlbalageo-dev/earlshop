@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Form, Button, Row, Col, Alert } from 'react-bootstrap';
+import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { register } from '../actions/userActions';
 import Loader from '../components/Loader';
-const RegisterScreen = () => {
+const RegisterScreen = ({ history }) => {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setlastName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [validated, setValidated] = useState(false);
 
   const dispatch = useDispatch();
 
   const userRegister = useSelector((state) => state.userRegister);
 
   const { loading, error, userInfo } = userRegister;
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push('/');
+    }
+  }, [history, userInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();
