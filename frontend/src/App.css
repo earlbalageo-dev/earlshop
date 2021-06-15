@@ -4,3 +4,7 @@
 main {
   min-height: 80vh;
 }
+
+* {
+  color: white !important;
+}

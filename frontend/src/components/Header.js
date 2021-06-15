@@ -16,7 +16,7 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg='light' expand='lg'>
+      <Navbar expand='lg'>
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>EarlShop</Navbar.Brand>
