@@ -1,9 +1,29 @@
 import express from 'express';
 const router = express.Router();
 
-import { registerUser, loginUser } from '../controllers/userControllers.js';
+import {
+  registerUser,
+  loginUser,
+  getUserProfile,
+  getUsers,
+  getUserById,
+  updateUserProfile,
+  updateUser,
+  deleteUser,
+} from '../controllers/userControllers.js';
 
-router.post('/register', registerUser);
+import { protect, admin } from '../middleware/autMiddleware.js';
+
+router.route('/').post(registerUser).get(protect, admin, getUsers);
 router.post('/login', loginUser);
+router
+  .route('/profile')
+  .get(protect, getUserProfile)
+  .put(protect, updateUserProfile);
+router
+  .route('/:id')
+  .delete(protect, admin, deleteUser)
+  .get(protect, admin, getUserById)
+  .put(protect, admin, updateUser);
 
 export default router;

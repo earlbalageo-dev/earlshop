@@ -1,21 +1,10 @@
 import mongoose from 'mongoose';
-import review from './ReviewSchema.js';
+import reviewSchema from './ReviewSchema.js';
 
-const productSize = mongoose.Schema({
-  size: {
-    type: String,
-    required: true,
-  },
-  countInStock: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-});
 const productSchema = mongoose.Schema(
   {
     user: {
-      type: mongoose.Schema.types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'User',
     },
@@ -23,20 +12,28 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    description: {
-      type: String,
-      required: true,
-    },
     image: {
       type: String,
       required: true,
     },
-    size: [productSize],
+    brand: {
+      type: String,
+      required: true,
+    },
     category: {
       type: String,
       required: true,
     },
-    reviews: [review],
+    description: {
+      type: String,
+      required: true,
+    },
+    reviews: [reviewSchema],
+    rating: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
     numReviews: {
       type: Number,
       required: true,
@@ -47,8 +44,15 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    countInStock: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 const Product = mongoose.model('Product', productSchema);
