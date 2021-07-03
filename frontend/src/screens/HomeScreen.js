@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
+import { Route } from 'react-router-dom';
+import SearchBox from '../components/SearchBox';
 import Product from '../components/Product';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
@@ -28,9 +30,26 @@ const HomeScreen = ({ match }) => {
     <>
       <Meta />
       {!keyword ? (
-        <ProductCarousel />
+        <Container>
+          <Row className='justify-content-md-center'>
+            <Col md={12}>
+              <span className='buy'>
+                <h1>Buy</h1>
+              </span>
+              <h1 className='sneaker'>Authentic Sneakers</h1>
+            </Col>
+          </Row>
+          <Row>
+            <Route
+              render={({ history }) => (
+                <SearchBox history={history} cn='searchHero' />
+              )}
+            />
+          </Row>
+        </Container>
       ) : (
-        <Link to='/' className='btn btn-light'>
+        //<ProductCarousel />
+        <Link variant='dark' to='/' className='btn btn-light'>
           Go Back
         </Link>
       )}

@@ -6,7 +6,7 @@ main {
 }
 
 * {
-  color: white !important;
+  color: white;
 }
 
 h3 {
@@ -27,6 +27,27 @@ h2 {
   margin: 0.1rem;
 }
 
+/*Hero*/
+.buy {
+  text-align: center;
+}
+.sneaker {
+  text-align: center;
+  background-color: #0f0f0f;
+}
+.searchHero {
+  max-width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+
+  background-color: white !important;
+}
+
+.searchHero::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black !important;
+  opacity: 1; /* Firefox */
+}
 /* carousel */
 /* 
 .carousel-item-next,

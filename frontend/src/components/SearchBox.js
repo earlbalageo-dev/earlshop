@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Component } from 'react';
 import { Form } from 'react-bootstrap';
 
-const SearchBox = ({ history }) => {
+const SearchBox = ({ history, cn }) => {
   const [keyword, setKeyword] = useState('');
 
   const submitHandler = (e) => {
@@ -20,13 +21,17 @@ const SearchBox = ({ history }) => {
         name='q'
         onChange={(e) => setKeyword(e.target.value)}
         placeholder='Search Products...'
-        className='mr-sm-2 ml-sm-5'
+        className={`mr-sm-2 ml-sm-5 ${cn}`}
       ></Form.Control>
       {/* <Button type='submit' variant='outline-success' className='p-2'>
         Search
       </Button> */}
     </Form>
   );
+};
+
+SearchBox.defaultProps = {
+  cn: '',
 };
 
 export default SearchBox;
