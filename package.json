@@ -18,9 +18,9 @@
   "author": "EARL BALAGEO",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/earlbalageo-dev/earlshop/issues"
+    "url": "https://github.com/earlbalageo-dev/shoemart/issues"
   },
-  "homepage": "https://github.com/earlbalageo-dev/earlshop#readme",
+  "homepage": "https://github.com/earlbalageo-dev/shoemart#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^10.0.0",
