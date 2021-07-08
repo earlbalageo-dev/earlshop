@@ -1,7 +1,7 @@
 {
-  "name": "earlshop",
+  "name": "shoemart",
   "version": "1.0.0",
-  "description": "EARLSHOP E-commerce made with MERN stack",
+  "description": "shoemart E-commerce made with MERN stack",
   "main": "index.js",
   "type": "module",
   "scripts": {
